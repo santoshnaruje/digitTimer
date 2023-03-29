@@ -1,0 +1,103 @@
+/* Write your CSS here */
+.bg-card {
+  background-image: linear-gradient(
+    to right,
+    #ffffff,
+    #cffcf1,
+    #defafe,
+    #cffcf1
+  );
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-reset-card {
+  display: flex;
+  align-items: center;
+}
+.text-content {
+  color: aqua;
+  font-weight: bold;
+}
+.increase-decrease-card {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.image-card {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/digital-timer-elapsed-bg.png');
+  height: 400px;
+  width: 500px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  margin-bottom: 50px;
+}
+.timer-card {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.display-card {
+  margin-top: 80px;
+  background-color: white;
+  align-self: center;
+  height: 150px;
+  width: 150px;
+  border-radius: 100px;
+}
+
+.card {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+img {
+  height: 30px;
+  width: 30px;
+  margin-left: 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.start-reset-button {
+  height: 30px;
+  width: 70px;
+  background-image: linear-gradient(to right, #defafe, green);
+  cursor: pointer;
+  font-size: 22px;
+}
+p {
+  font-size: 22px;
+  font-weight: bold;
+}
+.button {
+  border: none;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  margin-left: 5px;
+  margin-right: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 22px;
+}
