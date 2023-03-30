@@ -3,7 +3,11 @@ import {Component} from 'react'
 import './index.css'
 
 class DigitalTimer extends Component {
-  state = {minutes: 25, seconds: 0, isStart: false, intervalId: null}
+  state = {minutes: 25, seconds: 0, isStart: false}
+
+  componentWillUnmount = () => {
+    clearInterval(this.intervalId)
+  }
 
   increaseMinutes = () => {
     const {isStart} = this.state
@@ -24,18 +28,19 @@ class DigitalTimer extends Component {
   }
 
   resetBtn = () => {
-    this.setState({minutes: 25, seconds: 0})
+    clearInterval(this.intervalId)
+    this.setState({minutes: 25, seconds: 0, isStart: false})
   }
 
   start = () => {
     const {isStart} = this.state
-    this.setState({isStart: !isStart})
-
     if (!isStart) {
-      const id = setInterval(() => {
+      this.intervalId = setInterval(() => {
         const {minutes, seconds} = this.state
 
         const totalSeconds = minutes * 60 + seconds - 1
+        console.log(totalSeconds)
+        console.log(seconds)
 
         if (totalSeconds >= 0) {
           const remainMin = Math.floor(totalSeconds / 60)
@@ -44,11 +49,10 @@ class DigitalTimer extends Component {
           this.setState({minutes: remainMin, seconds: remainSec})
         }
       }, 1000)
-
-      this.setState({intervalId: id})
+      this.setState({isStart: true})
     } else {
-      const {intervalId} = this.state
-      clearInterval(intervalId)
+      clearInterval(this.intervalId)
+      this.setState({isStart: false})
     }
   }
 
@@ -61,24 +65,22 @@ class DigitalTimer extends Component {
           <div className="image-card">
             <div className="display-card">
               <h1 className="text-content">
-                {minutes < 10 ? `0${minutes} ` : minutes} :
-                {seconds < 10 ? `0${seconds}` : seconds}
+                {minutes < 9 ? `0${minutes} ` : minutes}:
+                {seconds < 9 ? `0${seconds}` : seconds}
               </h1>
               <p>{isStart ? 'Running' : 'Paused'}</p>
             </div>
           </div>
           <div>
             <div className="start-reset-card">
-              <button type="button" className="button" onClick={this.start}>
-                <img
-                  src={
-                    isStart
-                      ? 'https://assets.ccbp.in/frontend/react-js/pause-icon-img.png'
-                      : 'https://assets.ccbp.in/frontend/react-js/play-icon-img.png'
-                  }
-                  alt={isStart ? 'pause icon' : 'play icon'}
-                />
-              </button>
+              <img
+                src={
+                  isStart
+                    ? 'https://assets.ccbp.in/frontend/react-js/pause-icon-img.png'
+                    : 'https://assets.ccbp.in/frontend/react-js/play-icon-img.png'
+                }
+                alt={isStart ? 'pause icon' : 'play icon'}
+              />
 
               <button onClick={this.start} type="button" className="button">
                 {isStart ? 'Pause' : 'Start'}
@@ -100,6 +102,7 @@ class DigitalTimer extends Component {
                   onClick={this.decreaseMinutes}
                   className="start-reset-button"
                   type="button"
+                  disabled={isStart}
                 >
                   -
                 </button>
@@ -108,6 +111,7 @@ class DigitalTimer extends Component {
                   onClick={this.increaseMinutes}
                   className="start-reset-button"
                   type="button"
+                  disabled={isStart}
                 >
                   +
                 </button>
